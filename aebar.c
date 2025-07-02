@@ -1155,15 +1155,21 @@ get_visual (void)
   xv.depth = 32;
   int result = 0;
   XVisualInfo* result_ptr = NULL; 
+  xcb_visualid_t res;
+
   result_ptr = XGetVisualInfo(dpy, VisualDepthMask, &xv, &result);
 
   if (result > 0) {
-  visual_ptr = result_ptr->visual;
-  return result_ptr->visualid;
+    visual_ptr = result_ptr->visual;
+    res=result_ptr->visualid;
+  if (result_ptr)
+    XFree(result_ptr);
+  return res;
   }
   
   //fallback
   visual_ptr = DefaultVisual(dpy, scr_nbr);	
+
 	return scr->root_visual;
 }
 
@@ -1421,7 +1427,7 @@ void
 sighandle (int signal)
 {
   if (signal == SIGINT || signal == SIGTERM)
-  exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
 
 
@@ -1579,5 +1585,7 @@ main (int argc, char **argv)
   xcb_flush(c);
   }
 
+  if (visual_ptr)
+    XFree(visual_ptr);
   return EXIT_SUCCESS;
 }
