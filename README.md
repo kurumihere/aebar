@@ -9,5 +9,5 @@ to uninstall
 ````
 sudo make uninstall
 ````
-to fill the bar use conky see https://conky.sourceforge.net/docs.html
+to fill the bar use conky see https://conky.sourceforge.net/docs.html \
 my cfg https://github.com/kurumihere/cfg
