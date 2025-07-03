@@ -1,4 +1,4 @@
-# aebar
+# æbar
 to install
 ````
 git clone https://github.com/kurumihere/aebar
